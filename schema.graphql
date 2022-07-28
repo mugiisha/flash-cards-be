@@ -2,6 +2,33 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  delete(id: String!): Quiz!
+  login(email: String!, password: String!): AuthPayload!
+  post(answer: String!, question: String!): Quiz!
+  signup(email: String!, name: String!, password: String!): AuthPayload!
+  update(answer: String!, id: String!, question: String!): Quiz!
+}
+
 type Query {
-  ok: Boolean!
+  quizes: [Quiz!]!
+}
+
+type Quiz {
+  answer: String!
+  id: Int!
+  postedBy: User
+  question: String!
+}
+
+type User {
+  email: String!
+  id: Int!
+  name: String!
+  quizes: [Quiz!]!
 }
