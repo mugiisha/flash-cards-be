@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node --transpile-only --no-notify --exit-child  src/index.ts",
+    "start": "ts-node --transpile-only   src/index.ts",
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child  src/index.ts",
     "generate": "ts-node --transpile-only src/schema.ts"
   },
