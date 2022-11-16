@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./src/context"
 
 
 
@@ -28,7 +28,22 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  Mutation: {};
   Query: {};
+  Quiz: { // root type
+    answer: string; // String!
+    id: number; // Int!
+    question: string; // String!
+  }
+  User: { // root type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -42,18 +57,87 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  Mutation: { // field return type
+    delete: NexusGenRootTypes['Quiz']; // Quiz!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    post: NexusGenRootTypes['Quiz']; // Quiz!
+    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    update: NexusGenRootTypes['Quiz']; // Quiz!
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    quizes: NexusGenRootTypes['Quiz'][]; // [Quiz!]!
+  }
+  Quiz: { // field return type
+    answer: string; // String!
+    id: number; // Int!
+    postedBy: NexusGenRootTypes['User'] | null; // User
+    question: string; // String!
+  }
+  User: { // field return type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    quizes: NexusGenRootTypes['Quiz'][]; // [Quiz!]!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
+  Mutation: { // field return type name
+    delete: 'Quiz'
+    login: 'AuthPayload'
+    post: 'Quiz'
+    signup: 'AuthPayload'
+    update: 'Quiz'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    quizes: 'Quiz'
+  }
+  Quiz: { // field return type name
+    answer: 'String'
+    id: 'Int'
+    postedBy: 'User'
+    question: 'String'
+  }
+  User: { // field return type name
+    email: 'String'
+    id: 'Int'
+    name: 'String'
+    quizes: 'Quiz'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    delete: { // args
+      id: string; // String!
+    }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    post: { // args
+      answer: string; // String!
+      question: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      name: string; // String!
+      password: string; // String!
+    }
+    update: { // args
+      answer: string; // String!
+      id: string; // String!
+      question: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -87,7 +171,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
